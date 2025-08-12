@@ -1,3 +1,13 @@
+# Create SG-Privileged-Admins group if it does not exist
+if (-not (Get-ADGroup -Filter { Name -eq "SG-Privileged-Admins" } -ErrorAction SilentlyContinue)) {
+    New-ADGroup -Name "SG-Privileged-Admins" `
+        -SamAccountName "SG-Privileged-Admins" `
+        -GroupScope Global `
+        -GroupCategory Security `
+        -Path "OU=ADSHMedical,DC=adshclass,DC=com" `
+        -Description "Privileged administrative accounts with high-level permissions"
+}
+
 # Low Privilege Service Account
 New-ADUser -Name "svc_ADSHLowPriv" `
     -SamAccountName "svc_ADSHLowPriv" `
@@ -6,7 +16,7 @@ New-ADUser -Name "svc_ADSHLowPriv" `
     -Title "Service Account - Low Privilege" `
     -Department "IT" `
     -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" `
-    -AccountPassword (ConvertTo-SecureString "S3rv1c3LowP@ss!" -AsPlainText -Force) `
+    -AccountPassword (ConvertTo-SecureString "S3rv1c3LowP@ss!Now!" -AsPlainText -Force) `
     -Enabled $true
 
 # High Privilege Service Account
@@ -17,7 +27,7 @@ New-ADUser -Name "svc_ADSHHighPriv" `
     -Title "Service Account - High Privilege" `
     -Department "IT" `
     -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" `
-    -AccountPassword (ConvertTo-SecureString "S3rv1c3HighP@ss!" -AsPlainText -Force) `
+    -AccountPassword (ConvertTo-SecureString "S3rv1c3HighP@ss!Later!" -AsPlainText -Force) `
     -Enabled $true
 
 # Add high privilege service account to privileged group
