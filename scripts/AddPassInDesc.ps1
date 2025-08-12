@@ -21,4 +21,4 @@ foreach ($sa in $serviceAccounts) {
 }
 
 # Add the backup service account to the Backup Admins group
-Add-ADGroupMember -Identity "SG-Backup_Admins" -Members "svc_BackupAgent"
+Add-ADGroupMember -Identity "Backup Operators" -Members "svc_BackupAgent"
