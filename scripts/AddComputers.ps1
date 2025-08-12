@@ -18,3 +18,18 @@ for ($i=1; $i -le 100; $i++) {
         -Path $dept.OU `
         -Enabled $true
 }
+
+
+# Create 5 IT department computers trusted for delegation (not domain controllers)
+
+$itOU = "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com"
+
+for ($i=1; $i -le 5; $i++) {
+    $compName = "IT-DEL-PC0$i"
+    New-ADComputer -Name $compName `
+        -SamAccountName $compName `
+        -Path $itOU `
+        -Enabled $true
+    # Set trusted for delegation (Kerberos only)
+    Set-ADComputer -Identity $compName -TrustedForDelegation $true
+}
