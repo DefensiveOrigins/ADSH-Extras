@@ -1,10 +1,10 @@
 # 1. Create a new IT admin user
-New-ADUser -Name "Morgan Bishop" `
-    -GivenName "Morgan" `
-    -Surname "Bishop" `
-    -SamAccountName "morgan.bishop" `
-    -UserPrincipalName "morgan.bishop@adshclass.com" `
-    -DisplayName "Morgan Bishop" `
+New-ADUser -Name "Stanley Mercer" `
+    -GivenName "Stanley" `
+    -Surname "Mercer" `
+    -SamAccountName "stanley.mercer" `
+    -UserPrincipalName "stanley.mercerp@adshclass.com" `
+    -DisplayName "Stanley Mercer" `
     -Title "IT Admin" `
     -Department "IT" `
     -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" `
@@ -19,7 +19,7 @@ New-ADGroup -Name "SG-Password_Managers" `
     -Description "Delegated group for password reset rights"
 
 # 3. Add the new user to the password managers group
-Add-ADGroupMember -Identity "SG-Password_Managers" -Members "morgan.bishop"
+Add-ADGroupMember -Identity "SG-Password_Managers" -Members "stanley.mercer"
 
 # 4. Delegate permission to reset passwords for all users in ADSHMedical OU
 # This uses the Active Directory module and the Active Directory ACL cmdlets
