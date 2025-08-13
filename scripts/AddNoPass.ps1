@@ -20,8 +20,13 @@ $usersNoRequiredPassword = @(
     @{First="Diana"; Last="Patel"; Password="Str0ngP@ssw0rd4!"},
     @{First="Evan"; Last="Santos"; Password="Str0ngP@ssw0rd5!"}
 )
+$total = $usersNoRequiredPassword.Count
+$counter = 0
 
 foreach ($u in $usersNoRequiredPassword) {
+    $counter++
+    Write-Progress -Activity "Password Not Required Users" -Status "$counter of $total" -PercentComplete ($counter++ / $total  * 100)
+
     $sam = "$($u.First.ToLower()).$($u.Last.ToLower())"
     $upn = "$sam@adshclass.com"
     $display = "$($u.First) $($u.Last)"
