@@ -34,3 +34,11 @@ iex ((New-Object System.Net.WebClient).DownloadString("https://raw.githubusercon
 iex ((New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/AddPre2KComp.ps1"))
 iex ((New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/AddUsers.ps1"))
 iex ((New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/ChangePass2.ps1"))
+
+
+(Get-ADUser -Filter *).Count
+(Get-ADGroup -Filter *).Count
+(Get-ADComputer -Filter *).Count
+(Get-ADOrganizationalUnit -Filter *).count
+(Get-ADObject -Filter *).count
+
