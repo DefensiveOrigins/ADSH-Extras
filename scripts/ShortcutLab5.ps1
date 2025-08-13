@@ -6,7 +6,14 @@ IEX(New-Object Net.Webclient).DownloadString('https://https://builds.dotnet.micr
 cd C:\ADSH\GroupReport
 Invoke-WebRequest https://github.com/DefensiveOrigins/ADGroupDiagram/raw/refs/heads/main/App/ADGroupDiagram.exe -OutFile ADGroupDiagram.exe
 .\ADGroupDiagram.exe 
-Get-ChildItem | Select-Object Name, Length
+ mv .\ad-groups.html .\ad-groups-only.html
+ Get-ChildItem | Select-Object Name, Length
+
+ cd C:\ADSH\GroupReport
+.\ADGroupDiagram.exe -u
+ mv .\ad-groups.html .\ad-groups-with-users.html
+ Get-ChildItem | Select-Object Name, Length
 
 cd C:\ADSH\GroupReport
- ./ad-groups.html
+.\ad-groups-only.html
+.\ad-groups-with-users.html
