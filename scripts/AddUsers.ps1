@@ -1,7 +1,7 @@
 # Static lists for deterministic user creation
 $firstNames = @(
-    "Emily","Noah","Ava","Liam","Olivia","Ethan","Sophia","Jackson","Isabella","Lucas",
-    "Mia","Benjamin","Henry","Ella","William","Grace","James","Charlotte","Michael","Amelia",
+    "Abner","Charlee","Simon","Sonny","Marshall","Ivy","Irene","Leo","Jax","Ari",
+    "Alaya","Nola","Kyro","Isaiah","Lyla","Cruz","James","Charlotte","Michael","Amelia",
     "Alexander","Harper","Daniel","Abigail","Matthew","David","Joseph","Victoria","Samuel","Penelope",
     "Andrew","Layla","Joshua","Aria","Christopher","Chloe","Ryan","Zoey","Nathan","Nora",
     "Jonathan","Lily","Christian","Hannah","Gabriel","Avery","Anthony","Eleanor","Isaac","Addison",
@@ -12,8 +12,8 @@ $firstNames = @(
     "Archer","Amelie","Hadlee","Lea","Faith","Holly","Axton","Mya","Reid","Meghan"
 )
 $lastNames = @(
-    "Carter","James","Mitchell","Reynolds","Hayes","Brooks","Bennett","Ford","Chen","Morgan",
-    "Rivera","Lee","Wallace","Simmons","Ortiz","Clark","Turner","Parker","Evans","Cooper",
+    "Green","Cox","Greer","Colon","Blake","Yang","Roy","Estes","Ahmed","Good",
+    "Carson","English","McClure","Vega","Valdez","Clark","Turner","Parker","Evans","Cooper",
     "Morris","Murphy","Cook","Rogers","Peterson","Bailey","Kelly","Howard","Ward","Cox",
     "Diaz","Richardson","Wood","Watson","Gray","Hughes","Foster","Sanders","Ross","Henderson",
     "Coleman","Jenkins","Perry","Powell","Long","Patterson","Russell","Alexander","Butler","Barnes",
