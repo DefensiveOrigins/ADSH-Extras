@@ -8,7 +8,8 @@ $firstNames = @(
     "Madison","Elijah","Elizabeth","Sebastian","Brooklyn","Jack","Scarlett","Julian","Zoey","Levi",
     "Stella","Aaron","Hazel","Wyatt","Paisley","Owen","Aurora","Dylan","Savannah","Caleb",
     "Bella","Luke","Camila","Mason","Aubrey","Jayden","Lucy","Carter","Anna","Hunter",
-    "Samantha","Connor","Kennedy","Isaiah","Sadie","Lincoln","Skylar","Hudson","Genesis","Jaxon"
+    "Samantha","Connor","Kennedy","Isaiah","Sadie","Lincoln","Skylar","Hudson","Genesis","Jaxon",
+    "Archer","Amelie","Hadlee","Lea","Faith","Holly","Axton","Mya","Reid","Meghan"
 )
 $lastNames = @(
     "Carter","James","Mitchell","Reynolds","Hayes","Brooks","Bennett","Ford","Chen","Morgan",
@@ -18,7 +19,9 @@ $lastNames = @(
     "Coleman","Jenkins","Perry","Powell","Long","Patterson","Russell","Alexander","Butler","Barnes",
     "Gonzalez","Bryant","Nelson","Cruz","Reed","Price","Bell","Stewart","Sanchez","Morris",
     "Rogers","Cook","Morgan","Peterson","Bailey","Kelly","Howard","Ward","Cox","Diaz",
-    "Richardson","Wood","Watson","Brooks","Gray","Bennett","James","Hughes","Foster","Sanders"
+    "Richardson","Wood","Watson","Brooks","Gray","Bennett","James","Hughes","Foster","Sanders",
+    "Smith","Davis","Jones","Hayes","Everhart","Martinez","Miller","Anderson","Johnson","Taylor",
+    "Robinson","Smith","Williams","Wilson","Adams","Bush","McGreggor","Cobbs","Garcia","Wang"
 )
 
 # Job functions and OUs (cycled through for 100 users)
