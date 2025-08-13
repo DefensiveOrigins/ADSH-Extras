@@ -18,7 +18,7 @@ $total = $neverExpireUsers.Count
 
 foreach ($u in $neverExpireUsers) {
     $counter++
-    Write-Progress -Activity "Never Expire Users" -Status "$counter of $total" -PercentComplete ($counter++ / $total  * 100)
+    Write-Progress -Activity "Never Expire Users" -Status "$counter of $total" -PercentComplete ($counter / $total  * 100)
     $sam = "$($u.First.ToLower()).$($u.Last.ToLower())"
     $upn = "$sam@adshclass.com"
     $display = "$($u.First) $($u.Last)"
