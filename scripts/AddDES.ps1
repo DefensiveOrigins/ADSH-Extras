@@ -16,7 +16,7 @@ New-ADUser -Name "svc_ADSHLowPriv" `
     -Title "Service Account - Low Privilege" `
     -Department "IT" `
     -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" `
-    -AccountPassword (ConvertTo-SecureString "S3rv1c3LowP@ss!Now!" -AsPlainText -Force) `
+    -AccountPassword (ConvertTo-SecureString "Qd5Lt1w78uZy8vpV" -AsPlainText -Force) `
     -Enabled $true
 
 # High Privilege Service Account
@@ -27,7 +27,7 @@ New-ADUser -Name "svc_ADSHHighPriv" `
     -Title "Service Account - High Privilege" `
     -Department "IT" `
     -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" `
-    -AccountPassword (ConvertTo-SecureString "S3rv1c3HighP@ss!Later!" -AsPlainText -Force) `
+    -AccountPassword (ConvertTo-SecureString "1DsLD061aIVFv2bJ" -AsPlainText -Force) `
     -Enabled $true
 
 # Add high privilege service account to privileged group
