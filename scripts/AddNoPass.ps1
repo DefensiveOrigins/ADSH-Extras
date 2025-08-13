@@ -25,7 +25,7 @@ $counter = 0
 
 foreach ($u in $usersNoRequiredPassword) {
     $counter++
-    Write-Progress -Activity "Password Not Required Users" -Status "$counter of $total" -PercentComplete ($counter++ / $total  * 100)
+    Write-Progress -Activity "Password Not Required Users" -Status "$counter of $total" -PercentComplete ($counter / $total  * 100)
 
     $sam = "$($u.First.ToLower()).$($u.Last.ToLower())"
     $upn = "$sam@adshclass.com"
