@@ -20,5 +20,5 @@ cd C:\ADSH\GroupReport
  Get-ChildItem | Select-Object Name, Length
 
 cd C:\ADSH\GroupReport
-.\ad-groups-only.html
-.\ad-groups-with-users.html
+ ./ad-groups-only.html
+ ./ad-groups-with-users.html
