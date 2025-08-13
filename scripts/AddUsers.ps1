@@ -57,6 +57,7 @@ $passwords = @(
     "P@ssw0rd91!","P@ssw0rd92!","P@ssw0rd93!","P@ssw0rd94!","P@ssw0rd95!","P@ssw0rd96!","P@ssw0rd97!","P@ssw0rd98!","P@ssw0rd99!","P@ssw0rd100!"
 )
 # Create 100 static users
+
 for ($i=0; $i -lt 100; $i++) {
     $first = $firstNames[$i % $firstNames.Count]
     $last = $lastNames[$i % $lastNames.Count]
@@ -95,8 +96,8 @@ New-ADUser -Name "ADSH Service Account" `
     -AccountPassword (ConvertTo-SecureString $svcPw -AsPlainText -Force) `
     -Enabled $true
 # Create high privilege group and add service account
-New-ADGroup -Name "SG-Privileged-Admins" -GroupScope Global -GroupCategory Security -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" -Description "High privilege admin group"
-Add-ADGroupMember -Identity "SG-Privileged-Admins" -Members $svcSam
+New-ADGroup -Name "SG-Privileged-Admins-Legacy" -GroupScope Global -GroupCategory Security -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" -Description "High privilege admin group legacy"
+Add-ADGroupMember -Identity "SG-Privileged-Admins-Legacy" -Members $svcSam
 # --- Helpdesk Group ---
 New-ADGroup -Name "SG-Helpdesk" -GroupScope Global -GroupCategory Security -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" -Description "Helpdesk support group"
 # Add all Help Desk Technicians to Helpdesk group
