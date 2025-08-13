@@ -10,6 +10,7 @@ $departments = @(
 
 foreach ($dept in $departments) {
     for ($i=1; $i -le 20; $i++) {
+        Write-Progress -Activity "Creating Computers for $($dept.OU)" -Status "$i of 20" -PercentComplete ($i*5)
         $pcName = "$($dept.Abbr)-PC{0:D2}" -f $i
         New-ADComputer -Name $pcName `
             -SamAccountName $pcName `
@@ -23,6 +24,7 @@ foreach ($dept in $departments) {
 $itOU = "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com"
 
 for ($i=1; $i -le 5; $i++) {
+    Write-Progress -Activity "Creating Trusted Delegation Computers" -Status "$i of 5" -PercentComplete ($i*20)
     $compName = "IT-DEL-PC0$i"
     New-ADComputer -Name $compName `
         -SamAccountName $compName `
