@@ -59,6 +59,8 @@ $passwords = @(
 # Create 100 static users
 
 for ($i=0; $i -lt 100; $i++) {
+    $percentComplete = $i
+    Write-Progress -Activity "Adding Users" -Status "$i% Complete" -PercentComplete $percentComplete
     $first = $firstNames[$i % $firstNames.Count]
     $last = $lastNames[$i % $lastNames.Count]
     $job = $jobFunctions[$i % $jobFunctions.Count]
