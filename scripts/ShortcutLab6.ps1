@@ -76,5 +76,13 @@ cd c:\ADSH\GPO-Reports
 .\ADSH-Security.html
 .\GPP-Passwords.html
 
-
-Write-Host "Last step - run Restart-Computer" to restart the computer.
+Write-Host "."
+Write-Host "."
+Write-Host "."
+Write-Host "."
+Write-Host "."
+$null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
+Write-Host "Last step - press a key to restart" to restart the computer.
+Write-Host "."
+Write-Host "."
+restart-computer
