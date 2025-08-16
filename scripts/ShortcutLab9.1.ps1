@@ -10,6 +10,7 @@ Get-ChildItem  C:\ADSH\ADExplorer\ | Select-Object Name, Length
 
 cd c:\ADSH\AdExplorer 
 ./AdExplorer64.exe -snapshot "ADSHclass.com" c:\ADSH\ADExplorer-Snapshots\ADSHClass.com.1.dat  -accepteula 
+Start-Sleep -Seconds 1
 Get-ChildItem  C:\ADSH\ADExplorer-Snapshots\ | Select-Object Name, Length
 
 cd c:\ADSH
@@ -18,7 +19,31 @@ Set-ADUser -Identity Jolly.Rogers -PasswordNeverExpires $true
 
 cd c:\ADSH\AdExplorer 
 ./AdExplorer64.exe -snapshot "ADSHclass.com" c:\ADSH\ADExplorer-Snapshots\ADSHClass.com.2.dat  -accepteula
+Start-Sleep -Seconds 1
 Get-ChildItem  C:\ADSH\ADExplorer-Snapshots\ | Select-Object Name, Length
+
+
+
+cd C:\ADSH\ADExplorer-Snapshots\
+$ProgressPreference = 'SilentlyContinue'
+Invoke-WebRequest https://github.com/DefensiveOrigins/adexplorersnapshot-rs/releases/download/v0.0.2/convertsnapshot.exe -OutFile convertsnapshot.exe
+Invoke-WebRequest https://github.com/DefensiveOrigins/ADExplorerSnapshotRSComparer/raw/refs/heads/main/bin/Release/net8.0/publish/win-x86/AdExpDiffTar.exe -OutFile AdExpDiffTar.exe
+$ProgressPreference = 'Continue'
+Get-ChildItem  C:\ADSH\ADExplorer-Snapshots\ | Select-Object Name, Length
+
+
+cd C:\ADSH\ADExplorer-Snapshots\
+.\convertsnapshot.exe -o ADSHClass.com.1.tar.gz .\ADSHClass.com.1.dat
+.\convertsnapshot.exe -o ADSHClass.com.2.tar.gz .\ADSHClass.com.2.dat
+Get-ChildItem  C:\ADSH\ADExplorer-Snapshots\ | Select-Object Name, Length
+
+cd C:\ADSH\ADExplorer-Snapshots\
+.\AdExpDiffTar.exe --oldtgz ADSHClass.com.1.tar.gz --newtgz  ADSHClass.com.2.tar.gz --output ad_compare.html
+Get-ChildItem  C:\ADSH\ADExplorer-Snapshots\ | Select-Object Name, Length
+
+cd C:\ADSH\ADExplorer-Snapshots\
+./ad_compare.html
 
 cd c:\ADSH\AdExplorer
 ./AdExplorer64.exe /accepteula
+
