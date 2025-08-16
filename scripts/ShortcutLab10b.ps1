@@ -15,7 +15,7 @@ cd C:\ADSH\BloodHound\
 $ProgressPreference = 'SilentlyContinue'
 # We are using a static version of this BloodHound release.  The commented command below was the original.
 # Invoke-WebRequest -URI "https://github.com/BloodHoundAD/BloodHound/releases/download/4.0.3/BloodHound-win32-ia32.zip" -OutFile C:\ADSH\BloodHound\\BH-Rel32.zip
-Invoke-WebRequest -URI "https://github.com/DefensiveOrigins/AC-Extras/raw/refs/heads/main/BH/BloodHound-win32-ia32.zip" -OutFile C:\ADSH\BloodHound\BH-Rel32.zip
+Invoke-WebRequest -URI "https://github.com/DefensiveOrigins/ADSH-Extras/raw/refs/heads/main/BH/BloodHound-win32-ia32.zip" -OutFile C:\ADSH\BloodHound\BH-Rel32.zip
 $ProgressPreference = 'Continue'
 #expand-archive .\BH-Rel32.zip
 tar -xf .\BH-Rel32.zip
@@ -30,7 +30,7 @@ cd C:\ADSH\BloodHound\
 $ProgressPreference = 'SilentlyContinue'
 # We are using a static version of this BloodHound release.  The commented command below was the original.
 # invoke-WebRequest -URI https://github.com/BloodHoundAD/BloodHound/archive/master.zip -OutFile "master.zip"
-Invoke-WebRequest -URI https://github.com/DefensiveOrigins/AC-Extras/raw/refs/heads/main/BH/BloodHound-master.zip -OutFile "master.zip"
+Invoke-WebRequest -URI https://github.com/DefensiveOrigins/ADSH-Extras/raw/refs/heads/main/BH/BloodHound-master.zip -OutFile "master.zip"
 $ProgressPreference = 'Continue'
 expand-Archive master.zip
 cd .\master\BloodHound-master\Collectors\
