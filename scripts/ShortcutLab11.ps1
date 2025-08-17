@@ -1,5 +1,5 @@
 Get-WindowsFeature -Name AD-Certificate | Install-WindowsFeature
-Install-AdcsCertificationAuthority -CAType StandaloneRootCA
+Install-AdcsCertificationAuthority -CAType StandaloneRootCA -Force
 Add-WindowsFeature Adcs-Cert-Authority -IncludeManagementTools
 
 New-Item -ItemType Directory -Path "C:\ADSH\ADCS\" -Force > $null
