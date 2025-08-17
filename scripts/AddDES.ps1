@@ -32,3 +32,23 @@ New-ADUser -Name "svc_ADSHHighPriv" `
 
 # Add high privilege service account to privileged group
 Add-ADGroupMember -Identity "SG-Privileged-Admins" -Members "svc_ADSHHighPriv"
+
+# Add reversible encryption
+New-ADUser -Name "Tyler Carter" -GivenName "Tyler" -Surname "Carter" -SamAccountName "tyler.carter" -UserPrincipalName "tyler.carter@adshclass.com" -DisplayName "Tyler Carter" -Title "Help Desk Technician" -Department "IT" -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
+Add-ADGroupMember -Identity "SG-Help_Desk" -Members tyler.carter
+Set-ADUser -Identity "tyler.carter" -AllowReversiblePasswordEncryption $true
+
+# accidental delection
+Set-ADObject -Identity "tyler.carter" -ProtectedFromAccidentalDeletion:$true
+
+
+# add DESOnly
+New-ADUser -Name "Samantha Hollec" -GivenName "Samantha" -Surname "Hollec" -SamAccountName "samantha.hollec" -UserPrincipalName "samantha.hollec@adshclass.com" -DisplayName "Samantha Hollec" -Title "Help Desk Technician" -Department "IT" -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
+Add-ADGroupMember -Identity "SG-Help_Desk" -Members samantha.hollec
+Set-ADAccountControl -Identity samantha.hollec -UseDESKeyOnly $true
+
+
+# cannot change password
+New-ADUser -Name "Chris Cortez" -GivenName "Chris" -Surname "Cortez" -SamAccountName "chris.cortez" -UserPrincipalName "chris.cortez@adshclass.com" -DisplayName "Chris Cortez" -Title "Medical Coder" -Department "Billing & Records" -Path "OU=BillingAndRecords,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
+Add-ADGroupMember -Identity "SG-Medical_Coder" -Members chris.cortez
+Set-ADUser -Identity "chris.cortez" -CannotChangePassword $true
