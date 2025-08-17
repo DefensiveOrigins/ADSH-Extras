@@ -52,3 +52,16 @@ Set-ADAccountControl -Identity samantha.hollec -UseDESKeyOnly $true
 New-ADUser -Name "Chris Cortez" -GivenName "Chris" -Surname "Cortez" -SamAccountName "chris.cortez" -UserPrincipalName "chris.cortez@adshclass.com" -DisplayName "Chris Cortez" -Title "Medical Coder" -Department "Billing & Records" -Path "OU=BillingAndRecords,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
 Add-ADGroupMember -Identity "SG-Medical_Coder" -Members chris.cortez
 Set-ADUser -Identity "chris.cortez" -CannotChangePassword $true
+
+# trusted  for delegation
+Set-ADAccountControl -Identity "chris.cortez" -TrustedForDelegation $true
+
+#trusted toauthfordel
+New-ADUser -Name "Jack Jacobs" -GivenName "Jack" -Surname "Jacobs" -SamAccountName "jack.jacobs" -UserPrincipalName "jack.jacobs@adshclass.com" -DisplayName "Jack Jacobs" -Title "Medical Coder" -Department "Billing & Records" -Path "OU=BillingAndRecords,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
+Add-ADGroupMember -Identity "SG-Medical_Coder" -Members jack.jacobs
+Set-ADAccountControl -Identity "jack.jacobs" -TrustedToAuthForDelegation $True
+
+#account not delegated
+New-ADUser -Name "Meredith Blakenship" -GivenName "Meredith" -Surname "Blakenship" -SamAccountName "meredith.blackenship" -UserPrincipalName "meredith.blackenship@adshclass.com" -DisplayName "Meredith Blakenship" -Title "Medical Coder" -Department "Billing & Records" -Path "OU=BillingAndRecords,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
+Add-ADGroupMember -Identity "SG-Medical_Coder" -Members meredith.blackenship
+Set-ADAccountControl -Identity "meredith.blackenship" -AccountNotDelegated $true
