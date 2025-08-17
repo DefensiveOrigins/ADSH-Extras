@@ -30,12 +30,6 @@ $acl | Set-Acl c:\ADSH\GMSA
 $acl | Set-Acl c:\ADSH\GMSA\gmsalog.bat
 $acl | Set-Acl c:\ADSH\GMSA\log.txt
 
-cd c:\ADSH\GMSA
-$action = New-ScheduledTaskAction “c:\ADSH\GMSA\gmsalog.bat”
-$trigger = New-ScheduledTaskTrigger -Once -At (Get-Date) -RepetitionInterval (New-TimeSpan -Minutes 1)
-$principal = New-ScheduledTaskPrincipal -UserID adshclass\gmsa_bobrep$ -LogonType Password
-Register-ScheduledTask -Action $action -Trigger $trigger -TaskName "Test GMSA" -Description "Runs every minute" -Principal $principal
-
 
 Restart-Computer
 
