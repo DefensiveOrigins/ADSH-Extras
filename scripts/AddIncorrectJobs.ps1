@@ -9,6 +9,9 @@ Add-ADGroupMember -Identity "SG-Janitor" -Members isabella.chen
 # Add a Medical Assistant to the SysAdmin group
 Add-ADGroupMember -Identity "SG-SysAdmin" -Members ethan.brooks
 
+# Add a Medical Assistant to the SecurityAngalyst group
+Add-ADGroupMember -Identity "SG-Security_Analyst" -Members brooklyn.reed
+
 # Add a Janitor to the Nurse group
 Add-ADGroupMember -Identity "SG-Nurse" -Members william.ortiz
 
