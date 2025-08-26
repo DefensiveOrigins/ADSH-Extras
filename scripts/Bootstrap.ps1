@@ -14,7 +14,12 @@ if (Test-Path "C:\ADSH\Scripts\CheckContext.ps1") {
     Remove-Item "C:\ADSH\Scripts\CheckContext.ps1" -Force
 }
 Invoke-WebRequest -URI https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/CheckContext.ps1 -OutFile "C:\ADSH\Scripts\CheckContext.ps1"
-BootStrapLog "----  CheckContext Updated ----"
+BootStrapLog "---- CheckContext Updated ----"
+
+BootStrapLog "---- Set Edge FRU ----"
+iex ((New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/Set-EdgeFRU.ps1"))
+BootStrapLog "Edge FRU Edge Set
+
 
 BootStrapLog "---- Check FS-FileServer ----"
 $feature = Get-WindowsFeature FS-FileServer
