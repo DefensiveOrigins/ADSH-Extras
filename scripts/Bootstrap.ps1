@@ -101,12 +101,8 @@ BootStrapLog "---- Neo4j ----"
 # --- Neo4j Community 3.5.1 ---
 $neo4jPackage = "neo4j-community"
 $neo4jVersion = "3.5.1"
-try {
-    $neo4jInstalled = & C:\ProgramData\chocolatey\choco list --exact $neo4jPackage | Select-String $neo4jVersion
-} catch {
-    $neo4jInstalled = $null
-}
-if (-not $neo4jInstalled) {
+$neo4jInstalDir = "C:\tools\neo4j-community\neo4j-community-3.5.1"
+if (-not (Test-Path $neo4jInstalDir)) {
     BootStrapLog "Neo4j $neo4jVersion not found – installing..."
     C:\ProgramData\chocolatey\choco install $neo4jPackage --version=$neo4jVersion -y --accept-license
     BootStrapLog "Neo4j $neo4jVersion installation attempted."
