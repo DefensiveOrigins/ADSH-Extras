@@ -7,18 +7,22 @@ function BootStrapLog { param($m) Add-Content -Path $LogFile -Value "[$(Get-Date
 
 BootStrapLog "---- Bootstrap start ----"
 # Windows Features
+
+BootStrapLog "---- Check FS-FileServer ----"
 $feature = Get-WindowsFeature FS-FileServer
 if ($feature.InstallState -ne 'Installed') {
     BootStrapLog "Installing FS-FileServer"
     Install-WindowsFeature -Name FS-FileServer -IncludeManagementTools
 } else { BootStrapLog "FS-FileServer already installed" }
 
+BootStrapLog "---- Check FS-Resource-Manager ----"
 $feature = Get-WindowsFeature FS-Resource-Manager
 if ($feature.InstallState -ne 'Installed') {
     BootStrapLog "Installing FS-Resource-Manager"
     Install-WindowsFeature -Name FS-Resource-Manager -IncludeManagementTools
 } else { BootStrapLog "FS-Resource-Manager already installed" }
 
+BootStrapLog "---- Check ADCS ----"
 $feature = Get-WindowsFeature AD-Certificate 
 if ($feature.InstallState -ne 'Installed') {
     BootStrapLog "Installing ADCS"
@@ -26,6 +30,7 @@ if ($feature.InstallState -ne 'Installed') {
 } else { BootStrapLog "FS-Resource-Manager already installed" }
 
 # NuGet PackageProvider
+BootStrapLog "---- Checking NuGet provider ----"
 $prov = Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction SilentlyContinue |
         Sort-Object Version -Descending | Select-Object -First 1
 if (-not $prov -or [version]$prov.Version -lt [version]'2.8.5.201') {
@@ -33,21 +38,26 @@ if (-not $prov -or [version]$prov.Version -lt [version]'2.8.5.201') {
     Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 } else { BootStrapLog "NuGet provider OK" }
 
+BootStrapLog "---- Checking PSWriteColor module ----"
 if (-not (Get-Module -ListAvailable -Name PSWriteColor)) {
     BootStrapLog "Installing PSWriteColor"
     Install-Module -Name PSWriteColor -Force -SkipPublisherCheck -Scope AllUsers
 } else { BootStrapLog "PSWriteColor already installed" }
 
 # PowerShell Modules
+BootStrapLog "---- Checking GPOZaurr module ----"
 if (-not (Get-Module -ListAvailable -Name GPOZaurr)) {
     BootStrapLog "Installing GPOZaurr"
     Install-Module -Name GPOZaurr -AllowClobber -Force -Scope AllUsers
 } else { BootStrapLog "GPOZaurr already installed" }
 
+BootStrapLog "---- Checking Testimo module ----"
 if (-not (Get-Module -ListAvailable -Name Testimo)) {
     BootStrapLog "Installing Testimo"
     Install-Module -Name Testimo -AllowClobber -Force -SkipPublisherCheck -Scope AllUsers
 } else { BootStrapLog "Testimo already installed" }
+
+BootStrapLog "---- .Net Runtime ----"
 
 # .NET Runtime 8.0.19
 $dotnetVer = "8.0.19"
