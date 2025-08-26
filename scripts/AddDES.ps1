@@ -38,9 +38,6 @@ New-ADUser -Name "Tyler Carter" -GivenName "Tyler" -Surname "Carter" -SamAccount
 Add-ADGroupMember -Identity "SG-Help_Desk" -Members tyler.carter
 Set-ADUser -Identity "tyler.carter" -AllowReversiblePasswordEncryption $true
 
-# accidental delection
-Set-ADObject -Identity "tyler.carter" -ProtectedFromAccidentalDeletion:$true
-
 
 # add DESOnly
 New-ADUser -Name "Samantha Hollec" -GivenName "Samantha" -Surname "Hollec" -SamAccountName "samantha.hollec" -UserPrincipalName "samantha.hollec@adshclass.com" -DisplayName "Samantha Hollec" -Title "Help Desk Technician" -Department "IT" -Path "OU=IT,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
