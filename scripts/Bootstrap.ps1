@@ -97,7 +97,7 @@ if (-not (Test-Path $chocoExe)) {
     BootStrapLog "Chocolatey already installed."
 }
 
-
+BootStrapLog "---- Neo4j ----"
 # --- Neo4j Community 3.5.1 ---
 $neo4jPackage = "neo4j-community"
 $neo4jVersion = "3.5.1"
