@@ -65,11 +65,13 @@ BootStrapLog "---- .Net Runtime ----"
 $dotnetVer = "8.0.19"
 $dotnetDir = "C:\Program Files\dotnet\shared\Microsoft.NETCore.App\$dotnetVer"
 $dotnetUrl = "https://builds.dotnet.microsoft.com/dotnet/Runtime/$dotnetVer/dotnet-runtime-$dotnetVer-win-x64.exe"
-$dotnetInstaller = "C:\ProgramData\ADSH-Bootstrap\dotnet-runtime-$dotnetVer-win-x64.exe"
+$dotnetInstaller = "C:\ADSH\Bootstrap\dotnet-runtime-$dotnetVer-win-x64.exe"
 
 if (-not (Test-Path $dotnetDir)) {
     BootStrapLog "Downloading .NET Runtime $dotnetVer"
+    $ProgressPreference = 'SilentlyContinue'
     Invoke-WebRequest -Uri $dotnetUrl -OutFile $dotnetInstaller -UseBasicParsing
+    $ProgressPreference = 'Continue'
     BootStrapLog "Installing .NET Runtime $dotnetVer"
     Start-Process -FilePath $dotnetInstaller -ArgumentList '/install','/quiet','/norestart' -Wait
     BootStrapLog ".NET Runtime $dotnetVer install attempted"
