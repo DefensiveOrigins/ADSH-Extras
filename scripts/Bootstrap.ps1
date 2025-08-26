@@ -39,31 +39,25 @@ if ($feature.InstallState -ne 'Installed') {
 
 # NuGet PackageProvider
 BootStrapLog "---- Checking NuGet provider ----"
-$prov = Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction SilentlyContinue |
-        Sort-Object Version -Descending | Select-Object -First 1
-if (-not $prov -or [version]$prov.Version -lt [version]'2.8.5.201') {
-    BootStrapLog "Installing/Updating NuGet provider"
-    Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-} else { BootStrapLog "NuGet provider OK" }
+Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
+BootStrapLog "NugGet Installed"
 
 BootStrapLog "---- Checking PSWriteColor module ----"
-if (-not (Get-Module -ListAvailable -Name PSWriteColor)) {
-    BootStrapLog "Installing PSWriteColor"
-    Install-Module -Name PSWriteColor -Force -SkipPublisherCheck -Scope AllUsers
-} else { BootStrapLog "PSWriteColor already installed" }
+BootStrapLog "Installing PSWriteColor"
+Install-Module -Name PSWriteColor -SkipPublisherCheck -Scope AllUsers
+BootStrapLog "PSWriteColor Installed"
 
 # PowerShell Modules
 BootStrapLog "---- Checking GPOZaurr module ----"
-if (-not (Get-Module -ListAvailable -Name GPOZaurr)) {
-    BootStrapLog "Installing GPOZaurr"
-    Install-Module -Name GPOZaurr -AllowClobber -Force -Scope AllUsers
-} else { BootStrapLog "GPOZaurr already installed" }
+BootStrapLog "Installing GPOZaurr"
+Install-Module -Name GPOZaurr -AllowClobber -Scope AllUsers
+BootStrapLog "GPOZaurr Installed"
+
 
 BootStrapLog "---- Checking Testimo module ----"
-if (-not (Get-Module -ListAvailable -Name Testimo)) {
-    BootStrapLog "Installing Testimo"
-    Install-Module -Name Testimo -AllowClobber -Force -SkipPublisherCheck -Scope AllUsers
-} else { BootStrapLog "Testimo already installed" }
+BootStrapLog "Installing Testimo"
+Install-Module -Name Testimo -AllowClobber -SkipPublisherCheck -Scope AllUsers
+BootStrapLog "Testimo Installed"
 
 BootStrapLog "---- .Net Runtime ----"
 
