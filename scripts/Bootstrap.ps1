@@ -83,8 +83,6 @@ New-Item -ItemType Directory -Path "C:\ADSH\Scripts" -Force > $null
 if (Test-Path "C:\ADSH\Scripts\CheckContext.ps1") {
     Remove-Item "C:\ADSH\Scripts\CheckContext.ps1" -Force
 }
-Invoke-WebRequest -URI https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/CheckContext.ps1 -OutFile "C:\ADSH\Scripts\CheckContext.ps1"
-
 
 BootStrapLog "---- Bootstrap complete ----"
 
