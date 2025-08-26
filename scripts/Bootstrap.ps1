@@ -8,6 +8,14 @@ function BootStrapLog { param($m) Add-Content -Path $LogFile -Value "[$(Get-Date
 BootStrapLog "---- Bootstrap start ----"
 # Windows Features
 
+BootStrapLog "---- Check CheckContext ----"
+New-Item -ItemType Directory -Path "C:\ADSH\Scripts" -Force > $null
+if (Test-Path "C:\ADSH\Scripts\CheckContext.ps1") {
+    Remove-Item "C:\ADSH\Scripts\CheckContext.ps1" -Force
+}
+Invoke-WebRequest -URI https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/CheckContext.ps1 -OutFile "C:\ADSH\Scripts\CheckContext.ps1"
+BootStrapLog "----  CheckContext Updated ----"
+
 BootStrapLog "---- Check FS-FileServer ----"
 $feature = Get-WindowsFeature FS-FileServer
 if ($feature.InstallState -ne 'Installed') {
@@ -74,4 +82,13 @@ if (-not (Test-Path $dotnetDir)) {
 } else { BootStrapLog ".NET Runtime $dotnetVer already installed" }
 
 
+cd c:\ADSH
+New-Item -ItemType Directory -Path "C:\ADSH\Scripts" -Force > $null
+if (Test-Path "C:\ADSH\Scripts\CheckContext.ps1") {
+    Remove-Item "C:\ADSH\Scripts\CheckContext.ps1" -Force
+}
+Invoke-WebRequest -URI https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/CheckContext.ps1 -OutFile "C:\ADSH\Scripts\CheckContext.ps1"
+
+
 BootStrapLog "---- Bootstrap complete ----"
+
