@@ -1,3 +1,4 @@
+Write-Output "[*] Setup" 
 cd c:\ADSH
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $ProgressPreference = 'SilentlyContinue'
@@ -6,7 +7,7 @@ $ProgressPreference = 'Continue'
 Expand-Archive .\PingCastle.zip
 Remove-Item PingCastle.zip
 
-
+Write-Output "[*] Run PingCastle" 
 cd c:\ADSH\PingCastle
 ./PingCastle.exe --server 127.0.0.1 --healthcheck --level Full --no-enum-limit
 
@@ -22,7 +23,7 @@ cd c:\ADSH\PingCastle
 .\PingCastle.exe --scanner startup --scmode-all
 .\PingCastle.exe --scanner zerologon --scmode-all
 
-
+Write-Output "[*] Open Reports" 
 New-Item -ItemType Directory -Path "C:\ADSH\PingCastleReports" -Force > $null
 Move-Item -Path C:\ADSH\PingCastle\*ADSHClass.com* -Destination C:\ADSH\PingCastleReports\
 cd c:\ADSH\PingCastleReports
@@ -31,3 +32,5 @@ Get-ChildItem | Select-Object Name, Length
 
 cd c:\ADSH\PingCastleReports
 .\ad_hc_adshclass.com.html
+
+Write-Output "[!] Done" 

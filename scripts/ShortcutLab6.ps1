@@ -1,7 +1,7 @@
+Write-Output "[*] Setup" 
 Get-GPO -all | Format-Table -property DisplayName,GpoStatus,id -AutoSize
 
-
-
+Write-Output "[*] Download GPOs" 
 cd c:\ADSH
 New-Item -ItemType Directory -Path "C:\ADSH\GPOs" -Force > $null
 cd C:\ADSH\GPOs
@@ -14,7 +14,7 @@ Expand-Archive ADSH-GPOs.zip
 Remove-Item ADSH-GPOs.zip
 ls C:\ADSH\GPOs\ADSH-GPOs\GPOs
 
-
+Write-Output "[+] Import GPOS" 
 
 Import-GPO -Path C:\ADSH\GPOs\ADSH-GPOs\GPOs -BackupGpoName "ADSH-Security" -CreateIfNeeded -TargetName "ADSH-Security" 
 Import-GPO -Path C:\ADSH\GPOs\ADSH-GPOs\GPOs -BackupGpoName "ADSH-main2" -CreateIfNeeded -TargetName "ADSH-main2" 
@@ -29,6 +29,7 @@ Import-GPO -Path C:\ADSH\GPOs\ADSH-GPOs\GPOs -BackupGpoName "GPP-Passwords" -Cre
 
 Get-GPO -all | Format-Table -property DisplayName,GpoStatus,id -AutoSize
 
+Write-Output "[+] Link GPOS" 
 
 cd c:\ADSH
 New-GPLink -Name "ADSH-login" -Target "ou=ADSHMedical,dc=adshclass,dc=com" -LinkEnabled Yes
@@ -42,7 +43,7 @@ New-GPLink -Name "ADSH-Security" -Target "ou=ADSHMedical,dc=adshclass,dc=com" -L
 New-GPLink -Name "GPP-Passwords" -Target "ou=ADSHMedical,dc=adshclass,dc=com" -LinkEnabled Yes
 
 
-
+Write-Output "[*] Report GPOs" 
 
 cd c:\ADSH\
 New-Item -ItemType Directory -Path "C:\ADSH\GPO-Reports" -Force > $null
@@ -85,4 +86,6 @@ $null = $Host.UI.RawUI.ReadKey("NoEcho,IncludeKeyDown")
 Write-Host "Last step - press a key to restart" to restart the computer.
 Write-Host "."
 Write-Host "."
+Write-Output "[!] Done"
 restart-computer
+

@@ -62,3 +62,5 @@ Write-Output "Opening ADExplorer"
 cd c:\ADSH\AdExplorer
 ./AdExplorer64.exe /accepteula
 
+
+Write-Output "[!] Done" 

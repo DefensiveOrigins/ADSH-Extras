@@ -1,3 +1,4 @@
+Write-Output "[+] GMSA Setup" 
 New-ADOrganizationalUnit -Name "SecurityGroups" -Path "DC=ADSHClass,DC=com"
 New-ADOrganizationalUnit -Name "ComputerAccounts" -Path "DC=ADSHClass,DC=com"
 New-ADOrganizationalUnit -Name "GMSAGroups" -Path "OU=SecurityGroups,DC=ADSHClass,DC=com"
@@ -7,12 +8,14 @@ New-ADComputer -Name "svr_BillsReporter" -SamAccountName "svr_BillsReporter" -Pa
 ADD-ADGroupMember “sec_gmsa_BillsReportingService” –members “svr_BillsReporter$”
 ADD-ADGroupMember “sec_gmsa_BillsReportingService” –members “adsh-dc1$”
 
+Write-Output "[+] KDS Key" 
 Add-KdsRootKey –EffectiveTime ((get-date).addhours(-10))     
 
 New-ADOrganizationalUnit -Name "GMSAs" -Path "DC=adshclass,DC=com"
 
 New-ADServiceAccount -name gmsa_bobrep -PrincipalsAllowedToRetrieveManagedPassword sec_gmsa_BillsReportingService -path "OU=GMSAs,dc=adshclass,dc=com" -DNSHostName gmsa_bobrep$
 
+Write-Output "[+] Path+Script" 
 New-Item -ItemType Directory -Path "C:\ADSH\GMSA" -Force > $null
 cd c:\ADSH\GMSA
 echo "" | Out-File log.txt -Encoding ASCII
@@ -23,6 +26,8 @@ cd c:\ADSH\GMSA
 ./gmsalog.bat
 cat log.txt
 
+Write-Output "[+] ACL" 
+
 $acl = Get-Acl c:\ADSH\GMSA
 $AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("adshclass\gmsa_bobrep$","FullControl","Allow")
 $acl.SetAccessRule($AccessRule)
@@ -30,6 +35,7 @@ $acl | Set-Acl c:\ADSH\GMSA
 $acl | Set-Acl c:\ADSH\GMSA\gmsalog.bat
 $acl | Set-Acl c:\ADSH\GMSA\log.txt
 
+Write-Output "[!] Continue" 
 
 Restart-Computer
 

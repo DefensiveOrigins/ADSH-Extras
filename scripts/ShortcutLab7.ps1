@@ -1,3 +1,4 @@
+Write-Output "[*] Setup" 
 cd c:\ADSH
 get-adgroupmember 'enterprise admins' | select name,samaccountname
 get-adgroupmember 'schema admins' | select name,samaccountname
@@ -120,3 +121,5 @@ foreach($ReportAttrib in $ReportAttribs) {$ra++;write-progress -Activity "Genera
 cd c:\ADSH\PSReports
 ls
 
+
+Write-Output "[!] Done" 

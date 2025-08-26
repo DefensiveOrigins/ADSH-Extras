@@ -1,4 +1,6 @@
+Write-Output "[*] Setup" 
 New-Item -ItemType Directory -Path "C:\ADSH" -Force > $null
+Write-Output "[*] Defang EDR" 
 Set-MpPreference -ExclusionPath 'c:\users\Administrator'
 Set-MpPreference -ExclusionPath 'c:\ADSH'
 Set-MpPreference -ExclusionProcess "powershell.exe", "cmd.exe", "seatbelt.exe"
@@ -10,7 +12,7 @@ Set-MpPreference -EnableNetworkProtection AuditMode
 Set-MpPreference -Force -MAPSReporting Disabled
 Set-MpPreference -SubmitSamplesConsent NeverSend
 
-
+Write-Output "[*] Setup" 
 New-Item -ItemType Directory -Path "C:\ADSH\Seatbelt" -Force > $null
 cd C:\ADSH\Seatbelt
 $ProgressPreference = 'SilentlyContinue'
@@ -18,6 +20,7 @@ Invoke-WebRequest -URI "https://github.com/DefensiveOrigins/SharpCollection/raw/
 $ProgressPreference = 'Continue'
 ls C:\ADSH\Seatbelt\ | Select-Object Name, Length
 
+Write-Output "[*] Run Seatbelt" 
 ./seatbelt.exe
 
 ./seatbelt -q OSInfo
@@ -39,3 +42,6 @@ ls C:\ADSH\Seatbelt\ | Select-Object Name, Length
 .\seatbelt -q RDPSettings
 .\seatbelt -q SCCM
 .\seatbelt -q LAPS
+
+
+Write-Output "[!] Done"

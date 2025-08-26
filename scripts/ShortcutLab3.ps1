@@ -1,3 +1,4 @@
+ Write-Output "[+] OUs" 
 # Create root OU
 New-ADOrganizationalUnit -Name "ADSHMedical" -Path "DC=adshclass,DC=com"
 
@@ -8,6 +9,7 @@ New-ADOrganizationalUnit -Name "IT" -Path "OU=ADSHMedical,DC=adshclass,DC=com"
 New-ADOrganizationalUnit -Name "BillingAndRecords" -Path "OU=ADSHMedical,DC=adshclass,DC=com"
 New-ADOrganizationalUnit -Name "FacilitiesAndSupport" -Path "OU=ADSHMedical,DC=adshclass,DC=com"
 
+Write-Output "[+] Groups" 
 New-ADGroup -Name "SG-HR_Specialist"        -GroupScope Global -GroupCategory Security -Path "OU=Administration,OU=ADSHMedical,DC=adshclass,DC=com" -Description "Security group for HR Specialist"
 New-ADGroup -Name "SG-Executive_Assistant"  -GroupScope Global -GroupCategory Security -Path "OU=Administration,OU=ADSHMedical,DC=adshclass,DC=com" -Description "Security group for Executive Assistant"
 New-ADGroup -Name "SG-Office_Manager"       -GroupScope Global -GroupCategory Security -Path "OU=Administration,OU=ADSHMedical,DC=adshclass,DC=com" -Description "Security group for Office Manager"
@@ -34,6 +36,8 @@ New-ADGroup -Name "SG-All-IT"                   -GroupScope Global -GroupCategor
 New-ADGroup -Name "SG-All-BillingAndRecords"    -GroupScope Global -GroupCategory Security -Path "OU=BillingAndRecords,OU=ADSHMedical,DC=adshclass,DC=com" -Description "All billing and records staff"
 New-ADGroup -Name "SG-All-FacilitiesAndSupport" -GroupScope Global -GroupCategory Security -Path "OU=FacilitiesAndSupport,OU=ADSHMedical,DC=adshclass,DC=com" -Description "All support/facilities staff"
 
+
+Write-Output "[+] Membership" 
 Add-ADGroupMember -Identity "SG-All-Administration" -Members "SG-HR_Specialist","SG-Executive_Assistant","SG-Office_Manager"
 Add-ADGroupMember -Identity "SG-All-ClinicalServices" -Members "SG-Doctor","SG-Nurse","SG-Medical_Assistant"
 Add-ADGroupMember -Identity "SG-All-IT" -Members "SG-Help_Desk","SG-SysAdmin","SG-Security_Analyst"
@@ -44,6 +48,8 @@ New-ADGroup -Name "SG-All-ADSHStaff" -GroupScope Global -GroupCategory Security 
 
 Add-ADGroupMember -Identity "SG-All-ADSHStaff" -Members ` "SG-All-Administration", "SG-All-ClinicalServices", "SG-All-IT",   "SG-All-BillingAndRecords", "SG-All-FacilitiesAndSupport"
 
+
+Write-Output "[+] Security Groups" 
 # Allow print access to specific physical printer zones
 New-ADGroup -Name "SG-RESOURCE-Print-AdminWing"      -GroupScope Global -GroupCategory Security -Path "OU=Administration,OU=ADSHMedical,DC=adshclass,DC=com" -Description "Access to Admin Wing network printer"
 New-ADGroup -Name "SG-RESOURCE-Print-Clinical1stFlr" -GroupScope Global -GroupCategory Security -Path "OU=ClinicalServices,OU=ADSHMedical,DC=adshclass,DC=com" -Description "Access to 1st Floor Clinical printer"
@@ -73,6 +79,8 @@ New-ADGroup -Name "SG-RESOURCE-App-FacilitiesPortal" -GroupScope Global -GroupCa
 
 
 # Add membership
+
+Write-Output "[+] Memberships" 
 Add-ADGroupMember -Identity "SG-RESOURCE-FS-AdminDocs"         -Members "SG-All-Administration"
 Add-ADGroupMember -Identity "SG-RESOURCE-App-ClinicalEMR"      -Members "SG-All-ClinicalServices"
 Add-ADGroupMember -Identity "SG-RESOURCE-Print-ITWing"         -Members "SG-All-IT"
@@ -80,15 +88,16 @@ Add-ADGroupMember -Identity "SG-RESOURCE-FS-BillingDrive"      -Members "SG-All-
 Add-ADGroupMember -Identity "SG-RESOURCE-App-FacilitiesPortal" -Members "SG-All-FacilitiesAndSupport"
 
 # Create Groups
-
+Write-Output "[+] Security Groups"
 New-ADGroup -Name "SG-RESOURCE-VPN-AllStaff"         -GroupScope Global -GroupCategory Security -Path "OU=ADSHMedical,DC=adshclass,DC=com" -Description "VPN access for all staff"
 New-ADGroup -Name "SG-RESOURCE-Teams-GeneralChannel" -GroupScope Global -GroupCategory Security -Path "OU=ADSHMedical,DC=adshclass,DC=com" -Description "General Teams channel access"
 
 # Add membership
+Write-Output "[+] Memberships" 
 Add-ADGroupMember -Identity "SG-RESOURCE-VPN-AllStaff"         -Members "SG-All-ADSHStaff"
 Add-ADGroupMember -Identity "SG-RESOURCE-Teams-GeneralChannel" -Members "SG-All-ADSHStaff"
 
-
+Write-Output "[+] Users" 
 New-ADUser -Name "Emily Carter" -GivenName "Emily" -Surname "Carter" -SamAccountName "emily.carter" -UserPrincipalName "emily.carter@adshclass.com" -DisplayName "Emily Carter" -Title "HR Specialist" -Department "Administration" -Path "OU=Administration,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
 New-ADUser -Name "Noah James" -GivenName "Noah" -Surname "James" -SamAccountName "noah.james" -UserPrincipalName "noah.james@adshclass.com" -DisplayName "Noah James" -Title "Executive Assistant" -Department "Administration" -Path "OU=Administration,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
 New-ADUser -Name "Ava Mitchell" -GivenName "Ava" -Surname "Mitchell" -SamAccountName "ava.mitchell" -UserPrincipalName "ava.mitchell@adshclass.com" -DisplayName "Ava Mitchell" -Title "Office Manager" -Department "Administration" -Path "OU=Administration,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
@@ -111,6 +120,7 @@ New-ADUser -Name "Henry Wallace" -GivenName "Henry" -Surname "Wallace" -SamAccou
 New-ADUser -Name "Ella Simmons" -GivenName "Ella" -Surname "Simmons" -SamAccountName "ella.simmons" -UserPrincipalName "ella.simmons@adshclass.com" -DisplayName "Ella Simmons" -Title "Security Guard" -Department "Facilities & Support" -Path "OU=FacilitiesAndSupport,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
 New-ADUser -Name "William Ortiz" -GivenName "William" -Surname "Ortiz" -SamAccountName "william.ortiz" -UserPrincipalName "william.ortiz@adshclass.com" -DisplayName "William Ortiz" -Title "Janitor" -Department "Facilities & Support" -Path "OU=FacilitiesAndSupport,OU=ADSHMedical,DC=adshclass,DC=com" -AccountPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Enabled $true
 
+Write-Output "[+] Memberships" 
 Add-ADGroupMember -Identity "SG-HR_Specialist"       -Members emily.carter
 Add-ADGroupMember -Identity "SG-Executive_Assistant" -Members noah.james
 Add-ADGroupMember -Identity "SG-Office_Manager"      -Members ava.mitchell
@@ -132,8 +142,16 @@ Add-ADGroupMember -Identity "SG-Maintenance"     -Members henry.wallace
 Add-ADGroupMember -Identity "SG-Security_Guard"  -Members ella.simmons
 Add-ADGroupMember -Identity "SG-Janitor"         -Members william.ortiz
 
+
+Write-Output "[*] Users:"
 (Get-ADUser -Filter *).Count
+Write-Output "[*] Groups:"
 (Get-ADGroup -Filter *).Count
+Write-Output "[*] Computers:"
 (Get-ADComputer -Filter *).Count
+Write-Output "[*] OUs:"
 (Get-ADOrganizationalUnit -Filter *).count
+Write-Output "[*] Objects:"
 (Get-ADObject -Filter *).count
+
+Write-Output "[!] Done"
