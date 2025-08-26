@@ -10,16 +10,16 @@ Get-ChildItem  C:\ADSH\ADExplorer\ | Select-Object Name, Length
 
 cd c:\ADSH\AdExplorer 
 ./AdExplorer64.exe -snapshot "ADSHclass.com" c:\ADSH\ADExplorer-Snapshots\ADSHClass.com.1.dat  -accepteula 
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 2
 Get-ChildItem  C:\ADSH\ADExplorer-Snapshots\ | Select-Object Name, Length
 
 cd c:\ADSH
 DSADD user -upn Jolly.Rogers@ADSHclass.com "cn=Jolly.Rogers,CN=Users,DC=ADSHClass,DC=com" -fn "Jolly" -ln "Rogers" -disabled no -display "Jolly Rogers" -desc "Ranch Manager" -office "Yellowstone" -title "Ranch Manager" -company "Branch Ranch" -PWD "Badpass215613!!3"
 Set-ADUser -Identity Jolly.Rogers -PasswordNeverExpires $true
-
+Start-Sleep -Seconds 5
 cd c:\ADSH\AdExplorer 
 ./AdExplorer64.exe -snapshot "ADSHclass.com" c:\ADSH\ADExplorer-Snapshots\ADSHClass.com.2.dat  -accepteula
-Start-Sleep -Seconds 1
+Start-Sleep -Seconds 2
 Get-ChildItem  C:\ADSH\ADExplorer-Snapshots\ | Select-Object Name, Length
 
 
