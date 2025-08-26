@@ -1,6 +1,8 @@
  Write-Output "[*] Get ADCS" 
 Get-WindowsFeature -Name AD-Certificate | Install-WindowsFeature
+ Write-Output "[*] Install ADCS" 
 Install-AdcsCertificationAuthority -CAType StandaloneRootCA -Force
+ Write-Output "[*] Get ADCS Tools" 
 Add-WindowsFeature Adcs-Cert-Authority -IncludeManagementTools
 
  Write-Output "[*] Setup Lab" 
