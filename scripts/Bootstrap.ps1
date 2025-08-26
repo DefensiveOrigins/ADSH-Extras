@@ -18,7 +18,7 @@ BootStrapLog "---- CheckContext Updated ----"
 
 BootStrapLog "---- Set Edge FRU ----"
 iex ((New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/Set-EdgeFRU.ps1"))
-BootStrapLog "Edge FRU Edge Set
+BootStrapLog "Edge FRU Edge Set"
 
 
 BootStrapLog "---- Check FS-FileServer ----"
