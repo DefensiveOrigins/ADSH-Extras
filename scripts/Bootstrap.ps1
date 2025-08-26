@@ -102,7 +102,7 @@ if (-not (Test-Path $chocoExe)) {
 $neo4jPackage = "neo4j-community"
 $neo4jVersion = "3.5.1"
 try {
-    $neo4jInstalled = & C:\ProgramData\chocolatey\choco list --local-only --exact $neo4jPackage | Select-String $neo4jVersion
+    $neo4jInstalled = & C:\ProgramData\chocolatey\choco list --exact $neo4jPackage | Select-String $neo4jVersion
 } catch {
     $neo4jInstalled = $null
 }
