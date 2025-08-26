@@ -78,6 +78,19 @@ if (-not (Test-Path $dotnetDir)) {
 } else { BootStrapLog ".NET Runtime $dotnetVer already installed" }
 
 
+# --- Chocolatey ---
+$chocoExe = "C:\ProgramData\chocolatey\bin\choco.exe"
+
+if (-not (Test-Path $chocoExe)) {
+    BootStrapLog "Chocolatey not found – installing..."
+    Set-ExecutionPolicy Bypass -Scope Process -Force
+    Invoke-Expression (New-Object Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')
+    BootStrapLog "Chocolatey installation attempted."
+} else {
+    BootStrapLog "Chocolatey already installed."
+}
+
+
 # --- Neo4j Community 3.5.1 ---
 $neo4jPackage = "neo4j-community"
 $neo4jVersion = "3.5.1"
