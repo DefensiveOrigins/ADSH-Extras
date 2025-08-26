@@ -6,8 +6,8 @@ New-Item -ItemType Directory -Force -Path (Split-Path $LogFile) | Out-Null
 function BootStrapLog { param($m) Add-Content -Path $LogFile -Value "[$(Get-Date -Format s)] $m" }
 
 BootStrapLog "---- Bootstrap start ----"
-# Windows Features
 
+# Update CheckContext
 BootStrapLog "---- Check CheckContext ----"
 New-Item -ItemType Directory -Path "C:\ADSH\Scripts" -Force > $null
 if (Test-Path "C:\ADSH\Scripts\CheckContext.ps1") {
@@ -16,11 +16,12 @@ if (Test-Path "C:\ADSH\Scripts\CheckContext.ps1") {
 Invoke-WebRequest -URI https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/CheckContext.ps1 -OutFile "C:\ADSH\Scripts\CheckContext.ps1"
 BootStrapLog "---- CheckContext Updated ----"
 
+# Edge FRU
 BootStrapLog "---- Set Edge FRU ----"
 iex ((New-Object System.Net.WebClient).DownloadString("https://raw.githubusercontent.com/DefensiveOrigins/ADSH-Extras/refs/heads/main/scripts/Set-EdgeFRU.ps1"))
 BootStrapLog "Edge FRU Edge Set"
 
-
+# FS
 BootStrapLog "---- Check FS-FileServer ----"
 $feature = Get-WindowsFeature FS-FileServer
 if ($feature.InstallState -ne 'Installed') {
@@ -28,6 +29,7 @@ if ($feature.InstallState -ne 'Installed') {
     Install-WindowsFeature -Name FS-FileServer -IncludeManagementTools
 } else { BootStrapLog "FS-FileServer already installed" }
 
+# FSRM
 BootStrapLog "---- Check FS-Resource-Manager ----"
 $feature = Get-WindowsFeature FS-Resource-Manager
 if ($feature.InstallState -ne 'Installed') {
@@ -35,6 +37,7 @@ if ($feature.InstallState -ne 'Installed') {
     Install-WindowsFeature -Name FS-Resource-Manager -IncludeManagementTools
 } else { BootStrapLog "FS-Resource-Manager already installed" }
 
+# ADCS
 BootStrapLog "---- Check ADCS ----"
 $feature = Get-WindowsFeature AD-Certificate 
 if ($feature.InstallState -ne 'Installed') {
@@ -58,15 +61,14 @@ BootStrapLog "Installing GPOZaurr"
 Install-Module -Name GPOZaurr -AllowClobber -Scope AllUsers
 BootStrapLog "GPOZaurr Installed"
 
-
+# PowerShell Modules
 BootStrapLog "---- Checking Testimo module ----"
 BootStrapLog "Installing Testimo"
 Install-Module -Name Testimo -AllowClobber -SkipPublisherCheck -Scope AllUsers
 BootStrapLog "Testimo Installed"
 
-BootStrapLog "---- .Net Runtime ----"
-
 # .NET Runtime 8.0.19
+BootStrapLog "---- .Net Runtime ----"
 $dotnetVer = "8.0.19"
 $dotnetDir = "C:\Program Files\dotnet\shared\Microsoft.NETCore.App\$dotnetVer"
 $dotnetUrl = "https://builds.dotnet.microsoft.com/dotnet/Runtime/$dotnetVer/dotnet-runtime-$dotnetVer-win-x64.exe"
