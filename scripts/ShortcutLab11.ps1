@@ -28,18 +28,21 @@ Set-ADCSTemplateACL -DisplayName ADSHLab_User  -Enroll -Identity 'ADSHClass\Doma
 
 wget https://github.com/DefensiveOrigins/PSPKIAudit/archive/refs/heads/main.zip -O PSPKIAudit.zip
 Expand-Archive PSPKIAudit.zip
+Start-Sleep -Seconds 1
 ls  | Select-Object Name, Length
 
- Write-Output "[*] Run Audit" 
 
+ Write-Output "[*] Install PSPKIAudit" 
 
 cd C:\ADSH\ADCS\PSPKIAudit\PSPKIAudit-main
 Get-ChildItem -Recurse | Unblock-File
 Install-Module -Name PSPKI -Force
 Import-Module .\PSPKIAudit.psd1
 
-Invoke-PKIAudit | Tee-Object -FilePath "C:\ADSH\ADCS\PSPKIAudit-Report.txt"
+Write-Output "[*] Run Audit" 
 
+Invoke-PKIAudit | Tee-Object -FilePath "C:\ADSH\ADCS\PSPKIAudit-Report.txt"
+Start-Sleep -Seconds 1
 ls C:\ADSH\ADCS\ | Select-Object Name, Length
 
  Write-Output "[!] Done" 
