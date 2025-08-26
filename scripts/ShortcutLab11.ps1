@@ -10,8 +10,9 @@ Add-WindowsFeature Adcs-Cert-Authority -IncludeManagementTools
 New-Item -ItemType Directory -Path "C:\ADSH\ADCS\" -Force > $null
 cd C:\ADSH\ADCS\
 $wc = new-object System.Net.WebClient
-$wc.DownloadFile('https://github.com/DefensiveOrigins/ADSH-Extras/raw/refs/heads/main/ADCS/DOAZLab_Computer.json', 'C:\ADSH\ADCS\ADSHLab_Computer.json')
-$wc.DownloadFile('https://github.com/DefensiveOrigins/ADSH-Extras/raw/refs/heads/main/ADCS/DOAZLab_User.json', 'C:\ADSH\ADCS\ADSHLab_User.json')
+$wc.DownloadFile('https://github.com/DefensiveOrigins/ADSH-Extras/raw/refs/heads/main/ADCS/ADSH_Computer.json', 'C:\ADSH\ADCS\ADSHLab_Computer.json')
+$wc.DownloadFile('https://github.com/DefensiveOrigins/ADSH-Extras/raw/refs/heads/main/ADCS/ADSH_User.json', 'C:\ADSH\ADCS\ADSHLab_User.json')
+
 ls C:\ADSH\ADCS\ | Select-Object Name, Length
 
  Write-Output "[*] Install Templates" 
