@@ -102,13 +102,13 @@ if (-not (Test-Path $chocoExe)) {
 $neo4jPackage = "neo4j-community"
 $neo4jVersion = "3.5.1"
 try {
-    $neo4jInstalled = & choco list --local-only --exact $neo4jPackage | Select-String $neo4jVersion
+    $neo4jInstalled = & C:\ProgramData\chocolatey\choco list --local-only --exact $neo4jPackage | Select-String $neo4jVersion
 } catch {
     $neo4jInstalled = $null
 }
 if (-not $neo4jInstalled) {
     BootStrapLog "Neo4j $neo4jVersion not found – installing..."
-    choco install $neo4jPackage --version=$neo4jVersion -y --accept-license
+    C:\ProgramData\chocolatey\choco install $neo4jPackage --version=$neo4jVersion -y --accept-license
     BootStrapLog "Neo4j $neo4jVersion installation attempted."
 } else {
     BootStrapLog "Neo4j $neo4jVersion already installed."
