@@ -5,10 +5,12 @@ $edgeRegPath = "HKLM:\SOFTWARE\Policies\Microsoft\Edge"
 if (!(Test-Path $edgeRegPath)) {
     New-Item -Path $edgeRegPath -Force | Out-Null
 }
-
+Write-Output "Setting Edge First Run Experience."
 # Set the registry keys to disable first run experience
 Set-ItemProperty -Path $edgeRegPath -Name "HideFirstRunExperience" -Type DWord -Value 1
 Set-ItemProperty -Path $edgeRegPath -Name "PreventFirstRunPage" -Type DWord -Value 1
+
+Write-Output "Setting Edge Homepage & Fav Bar (about:blank)."
 
 ### Define blank tab & fav bar
 # Define the registry path for Edge policies
@@ -30,4 +32,3 @@ Set-ItemProperty -Path $EdgePolicyPath -Name "NewTabPageSetFeedType" -Value 0 -T
 # Hide the Favorites Bar
 Set-ItemProperty -Path $EdgePolicyPath -Name "FavoritesBarEnabled" -Value 0 -Type DWord
 
-Write-Output "Edge homepage, new tab page, and Favorites Bar settings have been applied for all users."
