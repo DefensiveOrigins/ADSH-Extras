@@ -78,11 +78,6 @@ if (-not (Test-Path $dotnetDir)) {
 } else { BootStrapLog ".NET Runtime $dotnetVer already installed" }
 
 
-cd c:\ADSH
-New-Item -ItemType Directory -Path "C:\ADSH\Scripts" -Force > $null
-if (Test-Path "C:\ADSH\Scripts\CheckContext.ps1") {
-    Remove-Item "C:\ADSH\Scripts\CheckContext.ps1" -Force
-}
 
 BootStrapLog "---- Bootstrap complete ----"
 
