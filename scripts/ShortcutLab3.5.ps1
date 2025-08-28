@@ -4,7 +4,7 @@ Set-ADAccountControl -Identity ethan.brooks -DoesNotRequirePreAuth $true
 
 # Assign SPN to Jackson Ford (SysAdmin)
 Write-Output "[+] SPN"
-Set-ADUser jackson.ford -ServicePrincipalNames @{Add="http/webapp01.adshclas"}
+Set-ADUser jackson.ford -ServicePrincipalNames @{Add="http/webapp01.adshclass.com"}
 
 # Set password never expires for Olivia Hayes (Nurse)
 Write-Output "[+] PasswordNeverExpires"
