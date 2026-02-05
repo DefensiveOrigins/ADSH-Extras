@@ -43,7 +43,7 @@ $feature = Get-WindowsFeature AD-Certificate
 if ($feature.InstallState -ne 'Installed') {
     BootStrapLog "Installing ADCS"
     Install-WindowsFeature -Name AD-Certificate  -IncludeManagementTools
-} else { BootStrapLog "FS-Resource-Manager already installed" }
+} else { BootStrapLog "ADCS already installed" }
 
 # NuGet PackageProvider
 BootStrapLog "---- Checking NuGet provider ----"
