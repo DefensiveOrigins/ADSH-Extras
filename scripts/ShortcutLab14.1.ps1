@@ -68,3 +68,64 @@ Write-Output "[*] 4625 IPs "
 $recent4625 | ForEach-Object { Parse-4625 $_ } |
     Group-Object IpAddress | Sort-Object Count -Descending |
     Select-Object Count, Name | Format-Table -AutoSize
+
+Write-Output "[*] Sleep for a moment " 
+Start-Sleep -Seconds 90
+
+
+Add-Type -AssemblyName System.Windows.Forms
+Add-Type -AssemblyName System.Windows.Forms.DataVisualization
+
+# Define time window
+$end = Get-Date
+$start = $end.AddHours(-2)
+
+# Get all 4625 events in the window
+$events = Get-WinEvent -FilterHashtable @{
+    LogName = 'Security'
+    Id      = 4625
+    StartTime = $start
+    EndTime   = $end
+}
+
+# Build per-minute timeline with zeroes for missing intervals
+$minutes = @{}
+for ($i = 0; $i -lt 120; $i++) {
+    $minute = $start.AddMinutes($i).ToString("yyyy-MM-dd HH:mm")
+    $minutes[$minute] = 0
+}
+foreach ($evt in $events) {
+    $minute = $evt.TimeCreated.ToString("yyyy-MM-dd HH:mm")
+    if ($minutes.ContainsKey($minute)) {
+        $minutes[$minute]++
+    }
+}
+
+# Prepare chart
+$chart = New-Object Windows.Forms.DataVisualization.Charting.Chart
+$chart.Width = 900
+$chart.Height = 400
+$chartArea = New-Object Windows.Forms.DataVisualization.Charting.ChartArea
+$chart.ChartAreas.Add($chartArea)
+$series = New-Object Windows.Forms.DataVisualization.Charting.Series
+$series.Name = "4625 Failures Per Minute"
+$series.ChartType = [Windows.Forms.DataVisualization.Charting.SeriesChartType]::Line
+
+foreach ($minute in $minutes.Keys | Sort-Object) {
+    $series.Points.AddXY($minute, $minutes[$minute])
+}
+
+$chart.Series.Add($series)
+
+$form = New-Object Windows.Forms.Form
+$form.Text = "4625 Logon Failures Timeline (Per Minute, Last 2 Hours)"
+$form.Width = 920
+$form.Height = 440
+$form.Controls.Add($chart)
+$chart.Dock = 'Fill'
+
+# Save the chart as a PNG image
+$savePath = "C:\ADSH\4625Failures.png"
+$chart.SaveImage($savePath, 'Png')
+
+C:\ADSH\4625Failures.png
