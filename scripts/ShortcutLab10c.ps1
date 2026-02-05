@@ -1,5 +1,5 @@
 Write-Output "[*] Setup Python" 
-winget install python3.12 --force --accept-source-agreements
+winget install Python.Python.3.12 --source winget --accept-source-agreements --accept-package-agreements
 Write-Output "[!] Continue]" 
 exit
 
