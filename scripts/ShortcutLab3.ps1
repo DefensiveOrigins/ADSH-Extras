@@ -46,7 +46,7 @@ Add-ADGroupMember -Identity "SG-All-FacilitiesAndSupport" -Members "SG-Maintenan
 
 New-ADGroup -Name "SG-All-ADSHStaff" -GroupScope Global -GroupCategory Security -Path "OU=ADSHMedical,DC=adshclass,DC=com" -Description "All ADSH Medical Group staff"
 
-Add-ADGroupMember -Identity "SG-All-ADSHStaff" -Members ` "SG-All-Administration", "SG-All-ClinicalServices", "SG-All-IT",   "SG-All-BillingAndRecords", "SG-All-FacilitiesAndSupport"
+Add-ADGroupMember -Identity "SG-All-ADSHStaff" -Members "SG-All-Administration", "SG-All-ClinicalServices", "SG-All-IT", "SG-All-BillingAndRecords", "SG-All-FacilitiesAndSupport"
 
 
 Write-Output "[+] Security Groups" 
